@@ -18,3 +18,8 @@ function getDistance(distance) {
 }
 
 module.exports = Distance;
+
+//有价值
+//可测试
+//从简单到复杂
+//从正常到异常

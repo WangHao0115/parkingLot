@@ -1,13 +1,13 @@
 {
-  "name": "mocha demo",
+  "name": "parking lot",
   "version": "1.0.0",
-  "description": "mocha demo",
+  "description": "parking lot",
   "main": "index.js",
   "scripts": {
     "test": "test"
   },
   "keywords": [
-    "mochademo"
+    "parking lot"
   ],
   "author": "wanghao",
   "license": "MIT",

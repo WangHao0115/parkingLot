@@ -1,7 +1,27 @@
+var _ = require("lodash");
 
-var Distance = require("./distance.js");
-
-function ParkingLot(distance, unit) {
-    this.distance = new Distance(distance, unit);
+function ParkingLot(capacity) {
+    this.capacity = !!capacity ? capacity : 10;
+    this.parkingCars = {};
 }
+
+ParkingLot.prototype.park = function(car){
+	if(_.size(this.parkingCars) >= this.capacity){
+		return;
+	}
+	var parkingStub = _.uniqueId();
+	this.parkingCars[parkingStub] = car;
+	return parkingStub;
+}
+
+ParkingLot.prototype.pickUp = function(parkingStub){
+	var car = this.parkingCars[parkingStub];
+	delete this.parkingCars[parkingStub];
+	return car;
+}
+
+ParkingLot.prototype.getAvailableParkingNumber = function(){
+	return this.capacity - _.size(this.parkingCars);
+}
+
 module.exports = ParkingLot;

@@ -4,7 +4,7 @@ var expect = require('chai').expect;
 var given  = require("mocha-testdata");
 var Distance = require("../../src/distance");
 
-describe("Distance", function () {
+describe.skip("Distance", function () {
 
 
     given([new Distance(1), new Distance(2)],
