@@ -45,7 +45,17 @@ describe("ParkingBoy", function () {
             var parkingStub = parkingBoy.park(car1);
 
             expect(firstParkingLot.pickUp(parkingStub)).to.equal(car1);
-            expect(firstParkingLot.pickUp(parkingStub)).to.be.undefined;
+            expect(secondParkingLot.pickUp(parkingStub)).to.be.undefined;
+        });
+
+        it("should be able to park a car to the second parking lot when first parking lot is full", function(){
+            var firstParkingLot = new ParkingLot(1);
+            var secondParkingLot = new ParkingLot(1);
+            var parkingBoy = new ParkingBoy([firstParkingLot, secondParkingLot]);
+            parkingBoy.park(car1);
+
+            var parkingStub = parkingBoy.park(car2);
+            expect(secondParkingLot.pickUp(parkingStub)).to.equal(car2);
         });
     });
 
