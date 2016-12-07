@@ -4,17 +4,35 @@ var Car = require("../../src/car.js");
 var ParkingBoy = require("../../src/parkingBoy.js");
 
 describe("ParkingBoy", function () {
-    var parkingLot;
-    var parkingBoy;
+    var car1, car2, car3, car4, car5;
 
     beforeEach(function(){
-        parkingLot = new ParkingLot(1);
-        parkingBoy = new ParkingBoy(parkingLot);
+        car1 = new Car("001");
+        car2 = new Car("001");
+        car3 = new Car("001");
+        car4 = new Car("001");
+        car5 = new Car("001");
     });
 
-    it("should park a car when there is only one parking lot ", function(){
-        var car = new Car("001");
-        var parkingStub = parkingBoy.park(car);
-        expect(parkingLot.pickUp(parkingStub)).to.equal(car);
+    describe("when there is only one parking lot", function(){
+
+        it("should be able to park a car", function(){
+            var parkingLot = new ParkingLot(1);
+            var parkingBoy = new ParkingBoy(parkingLot);
+
+            var parkingStub = parkingBoy.park(car1);
+
+            expect(parkingLot.pickUp(parkingStub)).to.equal(car1);
+        });
+
+        it("should not be able to park a car when the parking is full", function(){
+            var parkingLot = new ParkingLot(1);
+            var parkingBoy = new ParkingBoy(parkingLot);
+            parkingBoy.park(car1);
+
+            var parkingStub = parkingBoy.park(car2);
+
+            expect(parkingLot.pickUp(parkingStub)).to.be.undefined;
+        });
     });
 });
