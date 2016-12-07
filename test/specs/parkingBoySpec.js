@@ -4,14 +4,12 @@ var Car = require("../../src/car.js");
 var ParkingBoy = require("../../src/parkingBoy.js");
 
 describe("ParkingBoy", function () {
-    var car1, car2, car3, car4, car5;
+    var car1, car2, car3;
 
     beforeEach(function(){
         car1 = new Car("001");
-        car2 = new Car("001");
-        car3 = new Car("001");
-        car4 = new Car("001");
-        car5 = new Car("001");
+        car2 = new Car("002");
+        car3 = new Car("003");
     });
 
     describe("when there is only one parking lot", function(){
@@ -57,6 +55,30 @@ describe("ParkingBoy", function () {
             var parkingStub = parkingBoy.park(car2);
             expect(secondParkingLot.pickUp(parkingStub)).to.equal(car2);
         });
+
+        it("should not be able to park a car when all parking lots are full", function(){
+            var firstParkingLot = new ParkingLot(1);
+            var secondParkingLot = new ParkingLot(1);
+            var parkingBoy = new ParkingBoy([firstParkingLot, secondParkingLot]);
+            parkingBoy.park(car1);
+            parkingBoy.park(car2);
+
+            var parkingStub = parkingBoy.park(car3);
+            expect(parkingStub).to.be.undefined;
+        });
+
+        it("should park a car to the first parking lot when the first has available place again", function(){
+            var firstParkingLot = new ParkingLot(1);
+            var secondParkingLot = new ParkingLot(1);
+            var parkingBoy = new ParkingBoy([firstParkingLot, secondParkingLot]);
+            var parkingStub1 = parkingBoy.park(car1);
+            parkingBoy.park(car2);
+            firstParkingLot.pickUp(parkingStub1);
+
+            var parkingStub = parkingBoy.park(car3);
+            expect(firstParkingLot.pickUp(parkingStub)).to.equal(car3);
+        });
+
     });
 
 });
