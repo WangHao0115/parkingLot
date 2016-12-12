@@ -3,7 +3,7 @@ var ParkingLot = require("../../src/parkingLot.js");
 var Car = require("../../src/car.js");
 var ParkingBoy = require("../../src/parkingBoy.js");
 
-describe("ParkingBoy", function () {
+describe("SmartParkingBoy", function () {
     var car1, car2, car3;
 
     beforeEach(function(){
