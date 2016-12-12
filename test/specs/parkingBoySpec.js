@@ -32,6 +32,24 @@ describe("ParkingBoy", function () {
 
             expect(parkingLot.pickUp(parkingStub)).to.be.undefined;
         });
+
+        it("should be able to pick up the car that is parked in the parking lot", function(){
+            var parkingLot = new ParkingLot(1);
+            var parkingBoy = new ParkingBoy([parkingLot]);
+            var parkingStub = parkingBoy.park(car1);
+
+            expect(parkingBoy.pickUp(parkingStub)).to.equal(car1);
+        });
+
+        it("should not be able to pick up the car that has picked", function(){
+            var parkingLot = new ParkingLot(1);
+            var parkingBoy = new ParkingBoy([parkingLot]);
+            var parkingStub = parkingBoy.park(car1);
+
+            parkingLot.pickUp(parkingStub);
+
+            expect(parkingBoy.pickUp(parkingStub)).to.be.undefined;
+        });
     });
 
     describe("when there are two parking lots", function(){
@@ -76,9 +94,26 @@ describe("ParkingBoy", function () {
             firstParkingLot.pickUp(parkingStub1);
 
             var parkingStub = parkingBoy.park(car3);
-            expect(firstParkingLot.pickUp(parkingStub)).to.equal(car3);
+            expect(parkingBoy.pickUp(parkingStub)).to.equal(car3);
         });
 
-    });
+        it("should be able to pick up the car that is parked in the parking lot", function(){
+            var firstParkingLot = new ParkingLot(1);
+            var secondParkingLot = new ParkingLot(1);
+            var parkingBoy = new ParkingBoy([firstParkingLot, secondParkingLot]);
+            var parkingStub = parkingBoy.park(car1);
 
+            expect(parkingBoy.pickUp(parkingStub)).to.equal(car1);
+        });
+
+        it("should not be able to pick up the car that has picked", function(){
+            var firstParkingLot = new ParkingLot(1);
+            var secondParkingLot = new ParkingLot(1);
+            var parkingBoy = new ParkingBoy([firstParkingLot, secondParkingLot]);
+            var parkingStub = parkingBoy.park(car1);
+            parkingBoy.pickUp(parkingStub);
+
+            expect(parkingBoy.pickUp(parkingStub)).to.be.undefined;
+        });
+    });
 });

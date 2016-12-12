@@ -12,4 +12,12 @@ ParkingBoy.prototype.park = function(car){
     }
 };
 
+ParkingBoy.prototype.pickUp = function(car){
+    for(var index = 0; index < this.parkingLots.length; index++){
+        var car = this.parkingLots[index].pickUp(car);
+        if(!!car){
+            return car;
+        }
+    }
+};
 module.exports = ParkingBoy;
