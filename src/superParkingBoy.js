@@ -1,24 +1,18 @@
 var _ = require("lodash");
+var ParkingBoyBase = require("./parkingBoyBase");
 
-function SmartParkingBoy(parkingLots){
-    this.parkingLots = parkingLots;
+function SuperParkingBoy(parkingLots){
+    ParkingBoyBase.call(this, parkingLots);
 }
 
-SmartParkingBoy.prototype.park = function(car){
-    var maxAvailablePlacesParkingLot = _.maxBy(this.parkingLots, function (parkingLot) {
+SuperParkingBoy.prototype = new ParkingBoyBase();
+
+SuperParkingBoy.prototype.park = function(car){
+    var highestVacancyRateParkingLot = _.maxBy(this.parkingLots, function (parkingLot) {
         return parkingLot.getVacancyRate();
     });
 
-    return maxAvailablePlacesParkingLot.park(car);
+    return highestVacancyRateParkingLot.park(car);
 };
 
-SmartParkingBoy.prototype.pickUp = function(parkingStub){
-    for(var index = 0; index < this.parkingLots.length; index++){
-        var car = this.parkingLots[index].pickUp(parkingStub);
-        if(!!car){
-            return car;
-        }
-    }
-};
-
-module.exports = SmartParkingBoy;
+module.exports = SuperParkingBoy;

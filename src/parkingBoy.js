@@ -1,7 +1,10 @@
+var ParkingBoyBase = require("./parkingBoyBase");
 
 function ParkingBoy(parkingLots){
-    this.parkingLots = parkingLots;
+    ParkingBoyBase.call(this, parkingLots);
 }
+
+ParkingBoy.prototype = new ParkingBoyBase();
 
 ParkingBoy.prototype.park = function(car){
     for(var index = 0; index < this.parkingLots.length; index++){
@@ -12,12 +15,4 @@ ParkingBoy.prototype.park = function(car){
     }
 };
 
-ParkingBoy.prototype.pickUp = function(car){
-    for(var index = 0; index < this.parkingLots.length; index++){
-        var car = this.parkingLots[index].pickUp(car);
-        if(!!car){
-            return car;
-        }
-    }
-};
 module.exports = ParkingBoy;

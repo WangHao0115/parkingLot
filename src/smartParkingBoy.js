@@ -1,8 +1,11 @@
 var _ = require("lodash");
+var ParkingBoyBase = require("./parkingBoyBase");
 
 function SmartParkingBoy(parkingLots){
-    this.parkingLots = parkingLots;
+    ParkingBoyBase.call(this, parkingLots);
 }
+
+SmartParkingBoy.prototype = new ParkingBoyBase();
 
 SmartParkingBoy.prototype.park = function(car){
     var expectParkingLot = _.maxBy(this.parkingLots, function (parkingLot) {
@@ -10,15 +13,6 @@ SmartParkingBoy.prototype.park = function(car){
     });
 
     return expectParkingLot.park(car);
-};
-
-SmartParkingBoy.prototype.pickUp = function(parkingStub){
-    for(var index = 0; index < this.parkingLots.length; index++){
-        var car = this.parkingLots[index].pickUp(parkingStub);
-        if(!!car){
-            return car;
-        }
-    }
 };
 
 module.exports = SmartParkingBoy;
