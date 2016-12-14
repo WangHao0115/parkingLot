@@ -14,15 +14,15 @@ ParkingLotBuilder.prototype.withCapacity = function (capacity) {
 
 ParkingLotBuilder.prototype.withNumberOfParkingCars = function (numberOfParkingCars) {
     this.numberOfParkingCars = numberOfParkingCars;
+    return this;
 };
 
 ParkingLotBuilder.prototype.create = function () {
     var parkingLot = new ParkingLot(this.parkingLotCapacity);
-    for(var index = 1; index < this.numberOfParkingCars; index++){
+    for(var index = 0; index < this.numberOfParkingCars; index++){
         var car = new Car(_.uniqueId("NO_"));
         parkingLot.park(car);
     }
-
     return parkingLot;
 };
 

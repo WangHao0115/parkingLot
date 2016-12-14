@@ -1,6 +1,8 @@
 var expect = require('chai').expect;
-var ParkingLot = require("../../src/parkingLot.js");
 var Car = require("../../src/car.js");
+var given = require("mocha-testdata");
+var ParkingLot = require("../../src/parkingLot.js");
+var ParkingLotBuilder = require("../builders/parkingLotBuilder");
 
 describe("ParkingLot", function () {
 	var parkingLot;
@@ -73,5 +75,15 @@ describe("ParkingLot", function () {
 		parkingLot.pickUp(parkingStub);
 
 		expect(parkingLot.getAvailableParkingNumber()).to.equal(2);
+	});
+
+	it("should get right vacancy rate of parking lot", function(){
+		var parkingLotWithHundredPercentVacancy = new ParkingLotBuilder().withCapacity(1).withNumberOfParkingCars(0).create();
+		var parkingLotWithZeroPercentVacancy = new ParkingLotBuilder().withCapacity(1).withNumberOfParkingCars(1).create();
+		var parkingLotWithFiftyPercentVacancy = new ParkingLotBuilder().withCapacity(2).withNumberOfParkingCars(1).create();
+
+		expect(parkingLotWithHundredPercentVacancy.getVacancyRate()).to.equal(1);
+		expect(parkingLotWithFiftyPercentVacancy.getVacancyRate()).to.equal(0.5);
+		expect(parkingLotWithZeroPercentVacancy.getVacancyRate()).to.equal(0);
 	});
 });
