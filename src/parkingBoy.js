@@ -7,8 +7,8 @@ function ParkingBoy(parkingLots){
 ParkingBoy.prototype = new ParkingBoyBase();
 
 ParkingBoy.prototype.park = function(car){
-    for(var index = 0; index < this.parkingLots.length; index++){
-        var parkingStub = this.parkingLots[index].park(car);
+    for(var index = 0; index < this.parkingAbles.length; index++){
+        var parkingStub = this.parkingAbles[index].park(car);
         if(!!parkingStub){
             return parkingStub;
         }

@@ -8,7 +8,7 @@ function SmartParkingBoy(parkingLots){
 SmartParkingBoy.prototype = new ParkingBoyBase();
 
 SmartParkingBoy.prototype.park = function(car){
-    var expectParkingLot = _.maxBy(this.parkingLots, function (parkingLot) {
+    var expectParkingLot = _.maxBy(this.parkingAbles, function (parkingLot) {
         return parkingLot.getAvailableParkingNumber();
     });
 

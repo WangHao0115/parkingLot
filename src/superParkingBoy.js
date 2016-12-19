@@ -8,7 +8,7 @@ function SuperParkingBoy(parkingLots){
 SuperParkingBoy.prototype = new ParkingBoyBase();
 
 SuperParkingBoy.prototype.park = function(car){
-    var highestVacancyRateParkingLot = _.maxBy(this.parkingLots, function (parkingLot) {
+    var highestVacancyRateParkingLot = _.maxBy(this.parkingAbles, function (parkingLot) {
         return parkingLot.getVacancyRate();
     });
 

@@ -1,10 +1,10 @@
 function ParkingBoyBase(parkingLots){
-    this.parkingLots = parkingLots;
+    this.parkingAbles = parkingLots;
 }
 
 ParkingBoyBase.prototype.pickUp = function(parkingStub){
-    for(var index = 0; index < this.parkingLots.length; index++){
-        var car = this.parkingLots[index].pickUp(parkingStub);
+    for(var index = 0; index < this.parkingAbles.length; index++){
+        var car = this.parkingAbles[index].pickUp(parkingStub);
         if(!!car){
             return car;
         }
